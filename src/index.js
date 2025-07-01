@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; 
 import express from 'express';
 import Usuario from './models/usuario.js';
 import Laboratorio from './models/laboratorio.js';
