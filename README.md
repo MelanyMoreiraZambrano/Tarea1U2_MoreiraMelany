@@ -70,6 +70,11 @@ A continuación se presentan las consultas implementadas en el proyecto, cada un
 **Descripción:**  
 Uso básico de `.find()` para obtener todos los documentos de la colección de usuarios.
 
+```js
+const usuarios = await Usuario.find();
+  console.log('Usuarios:', usuarios);
+```
+
 **Figura 3: Listar todos los usuarios**  
 ![Figura 3: Listar todos los usuarios](src/img/listarUsuarios.png)
 
@@ -79,6 +84,14 @@ Uso básico de `.find()` para obtener todos los documentos de la colección de u
 
 **Descripción:**  
 Uso de `.find({ estado: 'disponible' })` para filtrar laboratorios con equipos disponibles.
+
+```js
+app.get('/laboratorios/disponibles', async (req, res) => {
+  const equiposDisponibles = await Equipo.find({ estado: 'disponible' }).populate('laboratorio');
+  const laboratorios = equiposDisponibles.map(e => e.laboratorio);
+  res.json(laboratorios);
+});
+```
 
 **Figura 4: Buscar laboratorios con equipos disponibles**  
 ![Figura 4: Buscar laboratorios con equipos disponibles](src/img/laboratoriosDisponibles.png)
@@ -90,6 +103,13 @@ Uso de `.find({ estado: 'disponible' })` para filtrar laboratorios con equipos d
 **Descripción:**  
 Uso de `.countDocuments()` para obtener el número de equipos según su estado.
 
+```js
+app.get('/equipos/estado/:estado', async (req, res) => {
+  const count = await Equipo.countDocuments({ estado: req.params.estado });
+  res.json({ estado: req.params.estado, cantidad: count });
+});
+```
+
 **Figura 5: Contar cantidad de equipos por estado**  
 ![Figura 5: Contar cantidad de equipos por estado](src/img/cantidadEstado.png)
 
@@ -100,6 +120,13 @@ Uso de `.countDocuments()` para obtener el número de equipos según su estado.
 **Descripción:**  
 Uso de expresiones regulares con `$regex` para buscar usuarios con correos específicos.
 
+```js
+app.get('/usuarios/correo/espe', async (req, res) => {
+  const usuarios = await Usuario.find({ correo: { $regex: /@espe\.edu\.ec$/ } });
+  res.json(usuarios);
+});
+```
+
 **Figura 6: Buscar usuarios por correo con regex**  
 ![Figura 6: Buscar usuarios por correo con regex](src/img/correoEspe.png)
 
@@ -109,6 +136,16 @@ Uso de expresiones regulares con `$regex` para buscar usuarios con correos espec
 
 **Descripción:**  
 Uso de `aggregate` con `$lookup`, `$group` y `$avg` para calcular el promedio de equipos por laboratorio.
+
+```js
+app.get('/equipos/promedio', async (req, res) => {
+  const promedio = await Equipo.aggregate([
+    { $group: { _id: '$laboratorio', total: { $sum: 1 } } },
+    { $group: { _id: null, promedio: { $avg: '$total' } } }
+  ]);
+  res.json({ promedio: promedio[0]?.promedio || 0 });
+});
+```
 
 **Figura 7: Promedio de equipos por laboratorio (aggregate)**  
 ![Figura 7: Promedio de equipos por laboratorio](src/img/promedioLab.png)
@@ -121,7 +158,10 @@ Las relaciones se establecieron mediante referencias (`ObjectId`) y el uso de `.
 
 Ejemplo de uso de `.populate()`:
 ```js
-Equipo.find().populate('usuario').populate('laboratorio').exec();
+app.get('/equipos/:id', async (req, res) => {
+  const equipo = await Equipo.findById(req.params.id).populate('laboratorio');
+  res.json(equipo);
+});
 ```
 **Figura 8: Relacion entre equipos y laboratorio**  
 ![Figura 8: Relacion entre colecciones](src/img/relacion.png)
