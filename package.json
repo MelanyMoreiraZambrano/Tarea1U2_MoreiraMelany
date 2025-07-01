@@ -14,5 +14,6 @@
     "express": "^5.1.0",
     "mongoose": "^8.0.0"
   },
-  "description": ""
+  "description": "**Título del proyecto:**  \r Tarea 1 Unidad 2: Consultas Avanzadas y Relaciones en MongoDB",
+  "devDependencies": {}
 }
