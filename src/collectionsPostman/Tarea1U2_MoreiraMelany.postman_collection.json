@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "52935bb0-5d35-453c-8422-753d0322718b",
+		"name": "Tarea1U2_MoreiraMelany",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31619488"
+	},
+	"item": [
+		{
+			"name": "ingresarUsuario",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Sol\",\r\n    \"correo\": \"sol@espe.edu.ec\",\r\n    \"edad\": 44\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/usuarios",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ingresarLaboratorios",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Lab Fisica\",\r\n  \"ubicacion\": \"Edificio B\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/laboratorios",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"laboratorios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ingresarEquipo",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"PC-04\",\r\n  \"estado\": \"disponible\",\r\n  \"laboratorio\": \"686342fd0cca7e31d859da0c\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/equipos",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"equipos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listarUsuarios",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/usuarios",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "laboratoriosDisponibles",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/laboratorios/disponibles",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"laboratorios",
+						"disponibles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cantidadEstado",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/equipos/estado/disponible",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"equipos",
+						"estado",
+						"disponible"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "correoTermineEspe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/usuarios/correo/espe",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"usuarios",
+						"correo",
+						"espe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "promedioEquiposPorLab",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/equipos/promedio",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"equipos",
+						"promedio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "relacionEquipoLaboratorio",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/equipos/686343650cca7e31d859da10",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"equipos",
+						"686343650cca7e31d859da10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
